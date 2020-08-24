@@ -37,6 +37,7 @@ sh "echo repoURL=$repoURL >> variable.properties"
 sh "echo commitId=${env.GIT_COMMIT} >> variable.properties"
 sh "echo BlackDuckProject=Canada-Application >> variable.properties"
 sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
+		    echo display()
             }
         }
     }
@@ -55,4 +56,7 @@ String determineRepoURL() {
 }
 String getGitBranchName() {
     return scm.branches[0].name
+}
+def display(){
+	echo hi
 }
