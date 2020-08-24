@@ -64,10 +64,10 @@ def display(){
 	def strippedVersionName = ''
 	if (env.CHANGE_ID !=null)
 	{
-		versionName=env.currentGitBranch
+		versionName=$branchName
 	}
 	else{
-	versionName=env.currentGitBranch
+	versionName=test
 	}	
 	
 	 return versionName
