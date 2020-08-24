@@ -32,5 +32,5 @@ String determineRepoURL() {
     return scm.getUserRemoteConfigs()[0].getUrl()
 }
 String getGitBranchName() {
-    return scm.branches[0].name.tokenize("*")[0].split("\\/")[1]
+    return scm.branches[0].name
 }
