@@ -59,5 +59,5 @@ String getGitBranchName() {
     return scm.branches[0].name
 }
 def display(){
-	echo hi
+	 return scm.branches[0].name
 }
