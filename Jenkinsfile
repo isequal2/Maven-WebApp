@@ -67,7 +67,7 @@ def display(){
 		versionName=$branchName
 	}
 	else{
-	versionName=$repoURL
+	versionName=$branchName
 	}	
 	
 	 return versionName
