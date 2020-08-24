@@ -64,8 +64,6 @@ def display(){
 	def time = new Date().format("yyyyMMdd")
 	def versionName
 	def strippedVersionName = ''
-	def branchName = 'test'
-	def repoName = 'develop'
 	if (env.CHANGE_ID !=null)
 	{
 		versionName=branchName
