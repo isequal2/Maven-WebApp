@@ -28,6 +28,7 @@ pipeline {
       echo "env.GIT_COMMIT"
       echo "${env.GIT_COMMIT}"
 	 }
+		    sh 'rm -rf *.properties'
                 sh "echo jobName=${env.JOB_NAME} >> variable.properties"
 sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
 sh "echo repoName=$repoName >> variable.properties"
