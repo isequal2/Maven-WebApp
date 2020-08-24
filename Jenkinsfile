@@ -1,3 +1,5 @@
+def repoName
+def branchName
 pipeline {
     agent any 
     stages {
@@ -67,7 +69,7 @@ def display(){
 		versionName=$branchName
 	}
 	else{
-	versionName=$branchName
+	versionName=$repoName
 	}	
 	
 	 return versionName
