@@ -16,5 +16,12 @@ pipeline {
                 echo 'deploy'
             }
         }
+        stage('checkou code'){
+            steps{
+                checkout scm
+              def url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
+                echo $url
+            }
+        }
     }
 }
