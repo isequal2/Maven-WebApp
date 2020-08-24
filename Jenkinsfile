@@ -27,6 +27,7 @@ pipeline {
       ])
       echo "env.GIT_COMMIT"
       echo "${env.GIT_COMMIT}"
+			  echo display()
 	 }
 		    sh 'rm -rf *.properties'
                 sh "echo jobName=${env.JOB_NAME} >> variable.properties"
@@ -37,7 +38,7 @@ sh "echo repoURL=$repoURL >> variable.properties"
 sh "echo commitId=${env.GIT_COMMIT} >> variable.properties"
 sh "echo BlackDuckProject=Canada-Application >> variable.properties"
 sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
-		    sh "echo display()"
+		  
             }
         }
     }
