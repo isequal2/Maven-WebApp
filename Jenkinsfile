@@ -68,10 +68,10 @@ def display(){
 	def repoName = 'develop'
 	if (env.CHANGE_ID !=null)
 	{
-		versionName=$branchName
+		versionName = branchName
 	}
 	else{
-	versionName=$repoName
+	versionName = repoName
 	}	
 	
 	 return versionName
