@@ -39,6 +39,12 @@ sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
             }
         }
     }
+	post {
+        always {
+            
+            archiveArtifacts artifacts: "variable.properties"
+        }
+    } 
 }
 String determineRepoName() {
     return scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
