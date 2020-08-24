@@ -18,9 +18,24 @@ pipeline {
         }
         stage('checkou code'){
             steps{
-                echo determineRepoName()
-                echo determineRepoURL()
-                echo getGitBranchName()
+                script{
+	 repoName = determineRepoName()
+         branchName = getGitBranchName() 
+         repoURL = determineRepoURL()
+                    def scmVars = checkout([
+        $class: 'GitSCM'
+      ])
+      echo "env.GIT_COMMIT"
+      echo "${env.GIT_COMMIT}"
+	 }
+                sh "echo jobName=${env.JOB_NAME} >> variable.properties"
+sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
+sh "echo repoName=$repoName >> variable.properties"
+sh "echo branchName=$branchName >> variable.properties"
+sh "echo repoURL=$repoURL >> variable.properties"
+sh "echo commitId=${env.GIT_COMMIT} >> variable.properties"
+sh "echo BlackDuckProject=Canada-Application >> variable.properties"
+sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
             }
         }
     }
