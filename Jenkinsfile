@@ -18,10 +18,11 @@ pipeline {
         }
         stage('checkou code'){
             steps{
-                checkout scm
-              def url = sh(returnStdout: true, script: 'git config remote.origin.url').trim()
-                echo $url
+                echo determineRepoName()
             }
         }
     }
+}
+String determineRepoName() {
+    return scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
 }
