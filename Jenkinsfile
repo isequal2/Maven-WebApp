@@ -59,5 +59,16 @@ String getGitBranchName() {
     return scm.branches[0].name
 }
 def display(){
-	 return scm.branches[0].name
+	def time = new Date().format("yyyyMMdd")
+	def versionName
+	def strippedVersionName = ''
+	if (env.CHANGE_ID !=null)
+	{
+		versionName=env.currentGitBranch
+	}
+	else{
+	versionName=env.currentGitBranch
+	}	
+	
+	 return versionName
 }
