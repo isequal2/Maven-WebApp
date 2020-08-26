@@ -40,7 +40,7 @@ sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
 sh "echo repoName=$repoName >> variable.properties"
 sh "echo branchName=$branchName >> variable.properties"
 sh "echo repoURL=$repoURL >> variable.properties"
-sh "echo commitId=${env.shortCommit} >> variable.properties"
+sh "echo ${env.shortCommit} >> variable.properties"
 sh "echo BlackDuckProject=Canada-Application >> variable.properties"
 sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
 		  
