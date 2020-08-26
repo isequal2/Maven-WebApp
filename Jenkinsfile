@@ -1,6 +1,7 @@
 def repoName
 def branchName
 def repoURL
+def finalVersion
 pipeline {
     agent any 
 	environment{
@@ -31,7 +32,7 @@ pipeline {
          repoURL = determineRepoURL()
 			def time = new Date().format("yyyyMMdd")
 			def versionName = branchName
-			def finalVersion=time+ "." +versionName+"."+env.BUILD_NUMBER
+			finalVersion=time+ "." +versionName+"."+env.BUILD_NUMBER
 			println "finalVersion ${finalVersion}"
                    /* def scmVars = checkout([
         $class: 'GitSCM'
