@@ -33,7 +33,6 @@ pipeline {
       ])
       echo "env.GIT_COMMIT"
       echo "${env.GIT_COMMIT}"
-			  echo display()
 	 }
 		    sh 'rm -rf *.properties'
                 sh "echo jobName=${env.JOB_NAME} >> variable.properties"
