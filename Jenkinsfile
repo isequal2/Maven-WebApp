@@ -4,7 +4,7 @@ def repoURL
 pipeline {
     agent any 
 	environment{
-		shortCommit = "${sh(returnStdout: true, script: 'git rev-parse HEAD')}"
+		shortCommit = "${sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()}"
 	}
     stages {
         stage('Build') { 
@@ -40,7 +40,7 @@ sh "echo buildNumber=${env.BUILD_NUMBER} >> variable.properties"
 sh "echo repoName=$repoName >> variable.properties"
 sh "echo branchName=$branchName >> variable.properties"
 sh "echo repoURL=$repoURL >> variable.properties"
-sh "echo ${env.shortCommit} >> variable.properties"
+sh "echo commitID=${env.shortCommit} >> variable.properties"
 sh "echo BlackDuckProject=Canada-Application >> variable.properties"
 sh "echo BlackDuckVersion=${env.BUILD_NUMBER} >> variable.properties"
 		  
