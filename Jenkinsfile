@@ -31,7 +31,7 @@ pipeline {
          repoURL = determineRepoURL()
 			def time = new Date().format("yyyyMMdd")
 			def versionName = branchName
-			def finalVersion=time+ "." +versioName+"."+env.BUILD_NUMBER
+			def finalVersion=time+ "." +versionName+"."+env.BUILD_NUMBER
 			println "finalVersion is ${finalVersion}"
 			echo ${finalVersion}
                    /* def scmVars = checkout([
