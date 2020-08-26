@@ -1,7 +1,6 @@
 def repoName
 def branchName
 def repoURL
-def finalVersion
 pipeline {
     agent any 
 	environment{
