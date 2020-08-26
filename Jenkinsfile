@@ -33,7 +33,7 @@ pipeline {
 			def versionName = branchName
 			def finalVersion=time+ "." +versionName+"."+env.BUILD_NUMBER
 			println "finalVersion ${finalVersion}"
-			echo ${finalVersion}
+			echo "${finalVersion}"
                    /* def scmVars = checkout([
         $class: 'GitSCM'
       ])
