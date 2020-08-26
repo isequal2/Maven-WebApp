@@ -25,14 +25,19 @@ pipeline {
         stage('checkou code'){
             steps{
                 script{
+			
 	 repoName = determineRepoName()
          branchName = getGitBranchName() 
          repoURL = determineRepoURL()
-                    def scmVars = checkout([
+			def time = new Date().format("yyyyMMdd")
+			def versionName = branchName
+			def finalVersion=time+ "." +versioName+"."+env.BUILD_NUMBER
+			println "finalVersion is ${finalVersion}"
+                   /* def scmVars = checkout([
         $class: 'GitSCM'
       ])
       echo "env.GIT_COMMIT"
-      echo "${env.GIT_COMMIT}"
+      echo "${env.GIT_COMMIT}"*/
 	 }
 		    sh 'rm -rf *.properties'
                 sh "echo jobName=${env.JOB_NAME} >> variable.properties"
