@@ -4,7 +4,7 @@ def repoURL
 pipeline {
     agent any 
 	environment{
-		shortCommit = "${sh(returnStdout: true, script: "git log -n 1")}"
+		shortCommit = "${sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()}"
 	}
     stages {
         stage('Build') { 
