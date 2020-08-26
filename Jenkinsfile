@@ -1,5 +1,6 @@
 def repoName
 def branchName
+def repoURL
 pipeline {
     agent any 
 	environment{
@@ -63,17 +64,4 @@ String determineRepoURL() {
 String getGitBranchName() {
     return scm.branches[0].name
 }
-def display(){
-	def time = new Date().format("yyyyMMdd")
-	def versionName
-	def strippedVersionName = ''
-	if (env.CHANGE_ID !=null)
-	{
-		versionName=branchName
-	}
-	else{
-	versionName=repoName
-	}	
-	
-	 return versionName
-}
+
