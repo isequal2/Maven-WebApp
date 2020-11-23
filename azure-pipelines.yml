@@ -16,6 +16,13 @@ steps:
     mavenPomFile: 'pom.xml'
     codeCoverageToolOption: Cobertura
     options: '-DskipTests'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello:world' >./variables.txt
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
