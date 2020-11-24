@@ -21,8 +21,16 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      
-      echo 'Hello:world' >./variables.txt
+		    sh 'rm -rf *.properties'
+        sh "echo jobName=${env.JOB_NAME} >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo buildNumber=${env.BUILD_NUMBER} >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo repoName=$repoName >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo branchName=$branchName >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo repoURL=$repoURL >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"		    		    
+        sh "echo commitID=${env.shortCommit} >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo BlackDuckProject=Canada-Application >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        sh "echo BlackDuckVersion=${finalVersion} >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt"
+        echo 'Hello:world' >> $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
