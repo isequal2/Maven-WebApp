@@ -30,6 +30,7 @@ steps:
       echo "BlackDuckProject=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "BlackDuckVersion=1" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo 'Hello=world' >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "containerID=$(Agent.Id)" >> $(build.artifactstagingdirectory)/environment-variables.txt
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
