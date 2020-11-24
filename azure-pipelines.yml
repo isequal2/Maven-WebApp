@@ -21,7 +21,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      echo "jobName=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/
+      echo "jobName=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "buildNumber=$(Build.BuildId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "repoName=$(Build.Repository.Name)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "branchName=$(Build.SourceBranchName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
@@ -29,7 +29,6 @@ steps:
       echo "commitID=$(Build.SourceVersion)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "BlackDuckProject=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "BlackDuckVersion=1" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo 'Hello=world' >> $(build.artifactstagingdirectory)/environment-variables.txt
 
 - task: PublishBuildArtifacts@1
   inputs:
