@@ -1,5 +1,3 @@
 FROM openjdk:alpine
 WORKDIR /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
-EXPOSE 8080
+COPY $(System.DefaultWorkingDirectory)/_Maven-WebApp/drop/target/*.war app.war
