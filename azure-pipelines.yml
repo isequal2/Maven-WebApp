@@ -1,5 +1,4 @@
 # Maven
-
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -17,8 +16,6 @@ steps:
     mavenPomFile: 'pom.xml'
     codeCoverageToolOption: Cobertura
     options: '-DskipTests'
-
-
 - task: Bash@3
   inputs:
     targetType: 'inline'
@@ -32,9 +29,13 @@ steps:
       echo "commitID=$(Build.SourceVersion)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "BlackDuckProject=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
       echo "BlackDuckVersion=1" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo 'Hello=world' >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "containerID=$(Build.ContainerId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/environment-variables.txt'
+    ArtifactName: 'drop1'
+    publishLocation: 'Container'
+    
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
@@ -44,7 +45,7 @@ steps:
   condition: succeededOrFailed()
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'VariableProperties'
-    publishLocation: 'Container'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
