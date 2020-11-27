@@ -16,25 +16,6 @@ steps:
     mavenPomFile: 'pom.xml'
     codeCoverageToolOption: Cobertura
     options: '-DskipTests'
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      echo "jobName=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "buildNumber=$(Build.BuildId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "repoName=$(Build.Repository.Name)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "branchName=$(Build.SourceBranchName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "repoURL=$(Build.Repository.Uri)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "commitID=$(Build.SourceVersion)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "BlackDuckProject=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
-      echo "BlackDuckVersion=1" >> $(build.artifactstagingdirectory)/environment-variables.txt
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/environment-variables.txt'
-    ArtifactName: 'drop1'
-    publishLocation: 'Container'
     
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
@@ -49,3 +30,30 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker registory'
+    repository: 'Maven-webapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      echo "jobName=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "buildNumber=$(Build.BuildId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "repoName=$(Build.Repository.Name)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "branchName=$(Build.SourceBranchName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "repoURL=$(Build.Repository.Uri)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "commitID=$(Build.SourceVersion)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "BlackDuckProject=$(Build.DefinitionName)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "BlackDuckVersion=$(Build.BuildId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+      echo "TwislockImageName=$(Build.DefinitionName)/$(Build.BuildId)" >> $(build.artifactstagingdirectory)/environment-variables.txt
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/environment-variables.txt'
+    ArtifactName: 'drop1'
+    publishLocation: 'Container'
